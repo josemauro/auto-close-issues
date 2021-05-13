@@ -3,7 +3,7 @@ const core = require("@actions/core");
 const github = require("@actions/github");
 const mdjson = require("mdjson");
 
-const ISSUE_TEMPLATE_DIR = ".github/ISSUE_TEMPLATE";
+// const ISSUE_TEMPLATE_DIR = ".github/ISSUE_TEMPLATE";
 
 // Grab the closing message from params or fallback to a default message
 const getIssueCloseMessage = () => {
