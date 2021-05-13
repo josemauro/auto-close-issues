@@ -31,23 +31,24 @@ const getIssueCloseMessage = () => {
   const issueBodyTitles = Object.keys(mdjson(issueBodyMarkdown));
 
   // Get a list of the templates
-  const issueTemplates = fs.readdirSync(ISSUE_TEMPLATE_DIR);
+  //const issueTemplates = fs.readdirSync(ISSUE_TEMPLATE_DIR);
 
   // Compare template titles with issue body
-  const doesIssueMatchAnyTemplate = issueTemplates.some(template => {
-    const templateMarkdown = fs.readFileSync(
-      `${ISSUE_TEMPLATE_DIR}/${template}`,
-      "utf-8"
-    );
-    const templateTitles = Object.keys(mdjson(templateMarkdown));
+  // const doesIssueMatchAnyTemplate = issueTemplates.some(template => {
+  //   const templateMarkdown = fs.readFileSync(
+  //     `${ISSUE_TEMPLATE_DIR}/${template}`,
+  //     "utf-8"
+  //   );
+  //   const templateTitles = Object.keys(mdjson(templateMarkdown));
 
-    return templateTitles.every(title => issueBodyTitles.includes(title));
-  });
+  //   return templateTitles.every(title => issueBodyTitles.includes(title));
+  // });
 
   const { issue } = github.context;
   const closedIssueLabel = core.getInput("closed-issues-label");
 
-  if (doesIssueMatchAnyTemplate || payload.action !== "opened") {
+  // if (doesIssueMatchAnyTemplate || payload.action !== "opened") {
+  if (payload.action !== "opened") {
     // Only reopen the issue if there's a `closed-issues-label` so it knows that
     // it was previously closed because of the wrong template
     if (payload.issue.state === "closed" && closedIssueLabel) {
